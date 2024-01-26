@@ -138,6 +138,7 @@ const encryptFunction = async function(generatedJwt,publicKey){
     ***** DECRYPT JWE *****
     The JWE is decrypted here.
 */
+	  var actualPayload;
 const decryptFunction = async function(jwe,privateKey){
 
   const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey)
@@ -145,7 +146,7 @@ const decryptFunction = async function(jwe,privateKey){
 
   const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
   const nestedJwt = stringify(jwtDecoded);
-  const actualPayload = base64Decode(jwtDecoded.payload.payload);
+  actualPayload = base64Decode(jwtDecoded.payload.payload);
 
   console.log(`Consumer Decrypted Nested JWT-\n${stringify(jwtDecoded)}\n`);
   console.log(`Consumer Decrypted Actual Payload-\n${actualPayload}\n`);
