@@ -10,7 +10,7 @@ var cookieParser = require("cookie-parser");
 const cors = require("cors");
 const colors = require("colors");
 const crypto = require("crypto");
-var MyInfoConnector = require("myinfo-connector-v4-nodejs");
+//var MyInfoConnector = require("myinfo-connector-v4-nodejs");
 const fs = require("fs");
 
 const jose = require("jose");
@@ -19,10 +19,10 @@ const {v4: uuidv4} = require("uuid");
 
 const app = express();
 const port = 3001;
-const config = require("./config/config.js");
-const connector = new MyInfoConnector(config.MYINFO_CONNECTOR_CONFIG);
+//const config = require("./config/config.js");
+//const connector = new MyInfoConnector(config.MYINFO_CONNECTOR_CONFIG);
 
-var sessionIdCache = {};
+//var sessionIdCache = {};
 
 app.use(express.json());
 app.use(cors());
@@ -40,7 +40,14 @@ app.use(
 );
 app.use(cookieParser());
 
-/*
+
+
+
+// Manu Below getPersonData function - call MyInfo Token + Person API
+app.post("/getPersonData", async function (req, res, next) {
+  try {
+console.log('Manu 01');
+    /*
     ***** FUNCTION TO RETURN base64 OUTPUT *****
 */
 function base64(text) {
@@ -145,11 +152,7 @@ const decryptFunction = async function(jwe,privateKey){
 
   return {decryptedJwt, nestedJwt, actualPayload}
 }
-
-
-// Manu Below getPersonData function - call MyInfo Token + Person API
-app.post("/getPersonData", async function (req, res, next) {
-  try {
+    
     // Execution of the program
 const api = async function(){
 
