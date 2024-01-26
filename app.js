@@ -1,7 +1,44 @@
 // DEPENDENCIES
+//const jose = require("jose");
+//const {v4: uuidv4} = require('uuid');
+//const jwt = require('jsonwebtoken');
+
+const express = require("express");
+var path = require("path");
+var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
+const cors = require("cors");
+const colors = require("colors");
+const crypto = require("crypto");
+var MyInfoConnector = require("myinfo-connector-v4-nodejs");
+const fs = require("fs");
+
 const jose = require("jose");
-const {v4: uuidv4} = require('uuid');
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const {v4: uuidv4} = require("uuid");
+
+const app = express();
+const port = 3001;
+const config = require("./config/config.js");
+const connector = new MyInfoConnector(config.MYINFO_CONNECTOR_CONFIG);
+
+var sessionIdCache = {};
+
+app.use(express.json());
+app.use(cors());
+
+app.set("views", path.join(__dirname, "public/views"));
+app.set("view engine", "pug");
+
+app.use(express.static("public"));
+
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
+app.use(cookieParser());
 
 /*
     ***** FUNCTION TO RETURN base64 OUTPUT *****
