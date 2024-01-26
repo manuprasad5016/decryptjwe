@@ -50,7 +50,7 @@ console.log('Manu 01');
   
     res.status(200).send('mmmm'); //return personData
   } 
-  }catch (error) {
+  catch (error) {
     console.log("---MyInfo NodeJs Library Error---".red);
     console.log(error);
     res.status(500).send({
