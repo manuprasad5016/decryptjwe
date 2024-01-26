@@ -110,9 +110,6 @@ const decryptFunction = async function(jwe,privateKey){
 }
 
 
-  
-}
-
 // Manu Below getPersonData function - call MyInfo Token + Person API
 app.post("/getPersonData", async function (req, res, next) {
   try {
@@ -189,14 +186,13 @@ const api = async function(){
    
     console.log(JSON.stringify(actualPayload)); // log the data for demonstration purpose only
     res.status(200).send(personData); //return personData
-  } catch (error) {
+  } 
+  }catch (error) {
     console.log("---MyInfo NodeJs Library Error---".red);
     console.log(error);
     res.status(500).send({
       error: error,
     });
   }
+  
 });
-
-
-
