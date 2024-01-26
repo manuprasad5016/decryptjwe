@@ -222,14 +222,12 @@ const api = async function(){
   // CONSUMER DECRYPTS JWE
   // Do note that validation of Nested JWT and other security measures are not in the sample code
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
- 
-    
-	}
-	api();
-   
-    console.log(JSON.stringify(actualPayload)); // log the data for demonstration purpose only
+  console.log('Manu 02-->'+JSON.stringify(actualPayload)); // log the data for demonstration purpose only
   
     res.status(200).send(actualPayload); //return personData
+    
+	}
+	api(); 
   } 
   catch (error) {
     console.log("---MyInfo NodeJs Library Error---");
