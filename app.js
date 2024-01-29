@@ -224,7 +224,7 @@ bekxr0oLRvetWi3T55V3dbNygjQY6+mj1qrP+FBgbHAmEX/Zl0mQmx5TOVpOXK0+\n\
 8CzpWoLt5oBjag/S8gsK942XCXMv0qsTC9+YeQsw60goY+MmVzY=\n\
 -----END ENCRYPTED PRIVATE KEY-----';
 
-	const josePrivateKey = CRYPTO.createPrivateKey({
+	const josePrivateKey = crypto.createPrivateKey({
     'key': encodedPrivateKeyString,
     'format': 'pem',
     'type': 'pkcs8',
