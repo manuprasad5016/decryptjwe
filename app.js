@@ -216,13 +216,21 @@ const api = async function(){
 
   const josePublicKey = await jose.importJWK(publicEncryptionKey,'ES256')
   //const josePrivateKey = await jose.importJWK(privateEncryptionKey,'ES256')
-	const josePrivateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----\n\
+	const encodedPrivateKeyString = '-----BEGIN ENCRYPTED PRIVATE KEY-----\n\
 MIHjME4GCSqGSIb3DQEFDTBBMCkGCSqGSIb3DQEFDDAcBAixiiSqsaS+tgICCAAw\n\
 DAYIKoZIhvcNAgkFADAUBggqhkiG9w0DBwQIxOVW8h0uDNAEgZATUj3kaiIG8KXB\n\
 v39VpTm9eqwfXfhQqQ8KFZSsA9eb1ou2Fyql+nu3hxWr6juf25y36deTLQn9hGBd\n\
 bekxr0oLRvetWi3T55V3dbNygjQY6+mj1qrP+FBgbHAmEX/Zl0mQmx5TOVpOXK0+\n\
 8CzpWoLt5oBjag/S8gsK942XCXMv0qsTC9+YeQsw60goY+MmVzY=\n\
 -----END ENCRYPTED PRIVATE KEY-----';
+
+	const josePrivateKey = CRYPTO.createPrivateKey({
+    'key': encodedPrivateKeyString,
+    'format': 'pem',
+    'type': 'pkcs8',
+    'cipher': 'aes-256-cbc',
+    'passphrase': 'manu'
+});
 	console.log('One Manu-->'+JSON.stringify(josePrivateKey));
 
   // PUBLISHER CREATES ENCRYPTED JWE
