@@ -215,7 +215,7 @@ const api = async function(){
 
   const josePublicKey = await jose.importJWK(publicEncryptionKey,'ES256')
   const josePrivateKey = await jose.importJWK(privateEncryptionKey,'ES256')
-	console.log('One Manu-->+josePrivateKey);
+	console.log('One Manu-->'+josePrivateKey);
 
   // PUBLISHER CREATES ENCRYPTED JWE
   const encrypted = await encryptFunction(generatedJwt, josePublicKey);
@@ -224,7 +224,7 @@ const api = async function(){
 
   // CONSUMER DECRYPTS JWE
   // Do note that validation of Nested JWT and other security measures are not in the sample code
-	console.log('Two Manu-->+encrypted);
+	console.log('Two Manu-->'+encrypted);
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
   console.log('Manu 02-->'+JSON.stringify(actualPayload)); // log the data for demonstration purpose only
   
