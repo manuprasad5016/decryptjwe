@@ -72,6 +72,7 @@ function stringify(json) {
 const importKey = async(key) => {
   const importedKey = await jose.importJWK(key, 'ES256')
   const privateKeyPKCS8 = await jose.exportPKCS8(importedKey);
+	console.log('Three Manu-->'+privateKeyPKCS8);
   return privateKeyPKCS8;
 }
 
