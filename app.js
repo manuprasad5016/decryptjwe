@@ -147,10 +147,13 @@ console.log('Onnmm');
 	console.log('Twww');
 	console.log('plaintext-->'+plaintext);
   const decryptedJwt = await new TextDecoder().decode(plaintext);
-console.log('decryptedJwt-->'+decryptedJwt);
+console.log('decryptedJwt Hmm-->'+decryptedJwt);
   const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
+	console.log('jwtDecoded-->'+jwtDecoded);
   const nestedJwt = stringify(jwtDecoded);
+	console.log('nestedJwt-->'+nestedJwt);
   actualPayload = base64Decode(jwtDecoded.payload.payload);
+	console.log('actualPayload-->'+actualPayload);
 
   console.log(`Consumer Decrypted Nested JWT-\n${stringify(jwtDecoded)}\n`);
   console.log(`Consumer Decrypted Actual Payload-\n${actualPayload}\n`);
