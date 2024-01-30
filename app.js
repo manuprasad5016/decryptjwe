@@ -152,8 +152,9 @@ console.log('decryptedJwt Hmm-->'+decryptedJwt);
 	console.log('jwtDecoded-->'+jwtDecoded);
   const nestedJwt = stringify(jwtDecoded);
 	console.log('nestedJwt-->'+nestedJwt);
-  actualPayload = base64Decode(jwtDecoded.payload.payload);
-	console.log('actualPayload-->'+actualPayload);
+  //actualPayload = base64Decode(jwtDecoded.payload.payload);
+	//console.log('actualPayload-->'+actualPayload);
+	actualPayload ='';
 
   console.log(`Consumer Decrypted Nested JWT-\n${stringify(jwtDecoded)}\n`);
   console.log(`Consumer Decrypted Actual Payload-\n${actualPayload}\n`);
@@ -269,7 +270,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
   // Do note that validation of Nested JWT and other security measures are not in the sample code
 	console.log('tttt Manu-->'+encrypted);
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
-  console.log('Manu 02-->'+JSON.stringify(actualPayload)); // log the data for demonstration purpose only
+  console.log('Manu 02-->'+JSON.stringify(decryptedJwt)); // log the data for demonstration purpose only
   
     res.status(200).send(actualPayload); //return personData
     
