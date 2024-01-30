@@ -235,14 +235,15 @@ bekxr0oLRvetWi3T55V3dbNygjQY6+mj1qrP+FBgbHAmEX/Zl0mQmx5TOVpOXK0+\n\
   const generatedJwt = await getJWT(issuer, subject, keyId, audience, text, privateSigningKey, thumbprint);
 
   const josePublicKey = await jose.importJWK(publicEncryptionKey,'ES256')
-  const josePrivateKey = await jose.importJWK(privateEncryptionKey,'ES256')
-	const encodedPrivateKeyString = '-----BEGIN ENCRYPTED PRIVATE KEY-----\n\
-MIHjME4GCSqGSIb3DQEFDTBBMCkGCSqGSIb3DQEFDDAcBAixiiSqsaS+tgICCAAw\n\
-DAYIKoZIhvcNAgkFADAUBggqhkiG9w0DBwQIxOVW8h0uDNAEgZATUj3kaiIG8KXB\n\
-v39VpTm9eqwfXfhQqQ8KFZSsA9eb1ou2Fyql+nu3hxWr6juf25y36deTLQn9hGBd\n\
-bekxr0oLRvetWi3T55V3dbNygjQY6+mj1qrP+FBgbHAmEX/Zl0mQmx5TOVpOXK0+\n\
-8CzpWoLt5oBjag/S8gsK942XCXMv0qsTC9+YeQsw60goY+MmVzY=\n\
------END ENCRYPTED PRIVATE KEY-----';
+  //const josePrivateKey = await jose.importJWK(privateEncryptionKey,'ES256')
+
+	const pkcs8 = '-----BEGIN PRIVATE KEY-----
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP
+SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7
+/8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6
+-----END PRIVATE KEY-----';
+	const josePrivateKey = await jose.importPKCS8(pkcs8,'ES256')
+	
 
 	/* const josePrivateKey = crypto.createPrivateKey({
     'key': encodedPrivateKeyString,
