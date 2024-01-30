@@ -46,7 +46,7 @@ app.use(cookieParser());
 // Manu Below getPersonData function - call MyInfo Token + Person API
 app.post("/getPersonData", async function (req, res, next) {
   try { 
-	  const encrypted = req.body.authCode;
+	  const encrypted = req.body.jweEncrypted;
 console.log('Manu 01-->'+encrypted);
       /*
     ***** FUNCTION TO RETURN base64 OUTPUT *****
