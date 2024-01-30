@@ -237,12 +237,12 @@ bekxr0oLRvetWi3T55V3dbNygjQY6+mj1qrP+FBgbHAmEX/Zl0mQmx5TOVpOXK0+\n\
   const josePublicKey = await jose.importJWK(publicEncryptionKey,'ES256')
   //const josePrivateKey = await jose.importJWK(privateEncryptionKey,'ES256')
 
-	const pkcs8 = '-----BEGIN PRIVATE KEY-----
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP
-SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7
-/8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6
+	const pkcs88 = '-----BEGIN PRIVATE KEY-----\n\
+MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP\n\
+SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
+/8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6\n\
 -----END PRIVATE KEY-----';
-	const josePrivateKey = await jose.importPKCS8(pkcs8,'ES256')
+	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256')
 	
 
 	/* const josePrivateKey = crypto.createPrivateKey({
