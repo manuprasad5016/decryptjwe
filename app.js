@@ -272,7 +272,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
   console.log('Manu 02-->'+JSON.stringify(decryptedJwt)); // log the data for demonstration purpose only
   
-    res.status(200).send(actualPayload); //return personData
+    res.status(200).send(decryptedJwt); //return personData
     
 	}
 	api(); 
