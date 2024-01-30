@@ -142,10 +142,12 @@ const encryptFunction = async function(generatedJwt,publicKey){
 */
 	  var actualPayload;
 const decryptFunction = async function(jwe,privateKey){
-
+console.log('Onnmm');
   const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey)
+	console.log('Twww');
+	console.log('plaintext-->'+plaintext);
   const decryptedJwt = await new TextDecoder().decode(plaintext);
-
+console.log('decryptedJwt-->'+decryptedJwt);
   const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
   const nestedJwt = stringify(jwtDecoded);
   actualPayload = base64Decode(jwtDecoded.payload.payload);
@@ -252,7 +254,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
     'cipher': 'aes-256-cbc',
     'passphrase': 'manu'
 }); */
-	console.log('One Manu-->'+JSON.stringify(josePrivateKey));
+	console.log('One Manu-->'+josePrivateKey);
 
   // PUBLISHER CREATES ENCRYPTED JWE 
   //const encrypted = await encryptFunction(generatedJwt, josePublicKey);
