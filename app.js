@@ -244,7 +244,8 @@ MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP\n\
 SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
 /8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6\n\
 -----END PRIVATE KEY-----';
-	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256')
+	console.log('Zero Manu-->');
+	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256');
 	
 
 	/* const josePrivateKey = crypto.createPrivateKey({
@@ -254,7 +255,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
     'cipher': 'aes-256-cbc',
     'passphrase': 'manu'
 }); */
-	console.log('One Manu-->'+josePrivateKey);
+	console.log('One Manu-->');
 
   // PUBLISHER CREATES ENCRYPTED JWE 
   //const encrypted = await encryptFunction(generatedJwt, josePublicKey);
@@ -263,7 +264,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
 
   // CONSUMER DECRYPTS JWE
   // Do note that validation of Nested JWT and other security measures are not in the sample code
-	//console.log('Two Manu-->'+encrypted);
+	console.log('tttt Manu-->'+encrypted);
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
   console.log('Manu 02-->'+JSON.stringify(actualPayload)); // log the data for demonstration purpose only
   
