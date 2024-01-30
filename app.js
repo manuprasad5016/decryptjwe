@@ -190,7 +190,7 @@ bekxr0oLRvetWi3T55V3dbNygjQY6+mj1qrP+FBgbHAmEX/Zl0mQmx5TOVpOXK0+\n\
 
 	const privateEncryptionKey={
   kty: 'EC',
-  crv: 'p256',
+  crv: 'P-256',
    use: 'enc',
    kid: 'apex-example-encrypt',
   x: '9wfzjrGqHQiZuvjLPy3J397-Vwz6VMrb_mmoxg4bfLE',
