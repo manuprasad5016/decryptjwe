@@ -270,9 +270,9 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
   // Do note that validation of Nested JWT and other security measures are not in the sample code
 	console.log('tttt Manu-->'+encrypted);
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
-  console.log('Manu 02-->'+JSON.stringify(decryptedJwt)); // log the data for demonstration purpose only
+  console.log('Manu 02-->'+JSON.stringify(nestedJwt)); // log the data for demonstration purpose only
   
-    res.status(200).send(decryptedJwt); //return personData
+    res.status(200).send(nestedJwt); //return personData
     
 	}
 	api(); 
