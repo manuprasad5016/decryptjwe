@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.post("/decryptCookie", async function (req, res, next) {
   try { 
 	const encrypted = req.body.jweEncrypted;
-	console.log('Manu 01-->'+encrypted);
+	console.log('Cookie Received from Req-->'+encrypted);
   
 /*
     ***** FUNCTION TO RETURN STRINGIFY OUTPUT *****
@@ -48,10 +48,8 @@ function stringify(json) {
     The JWE is decrypted here.
 */
 	  var actualPayload;
-const decryptFunction = async function(jwe,privateKey){
-	console.log('Onnmm');
-  	const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey)
-	console.log('Twww');
+const decryptFunction = async function(jwe,privateKey){ 
+  	const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey) 
 	console.log('plaintext-->'+plaintext);
   	const decryptedJwt = await new TextDecoder().decode(plaintext);
 	console.log('decryptedJwt Hmm-->'+decryptedJwt);
@@ -64,24 +62,18 @@ const decryptFunction = async function(jwe,privateKey){
 }
     
     // Execution of the program
-const api = async function(){ 
-
+const api = async function(){  
 	const pkcs88 = '-----BEGIN PRIVATE KEY-----\n\
 MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP\n\
 SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
 /8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6\n\
------END PRIVATE KEY-----';
-	console.log('Zero Manu-->');
+-----END PRIVATE KEY-----'; 
 	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256');
-	  
-  // CONSUMER DECRYPTS JWE
-  // Do note that validation of Nested JWT and other security measures are not in the sample code
-	console.log('tttt Manu-->'+encrypted);
+ 
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
-  console.log('Manu 02-->'+JSON.stringify(nestedJwt)); // log the data for demonstration purpose only
+  console.log('Decrypted JWT is-->'+JSON.stringify(nestedJwt)); 
   
-    res.status(200).send(nestedJwt); //return personData
-    
+    res.status(200).send(nestedJwt);
 	}
 	api(); 
   } 
@@ -91,8 +83,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
     res.status(500).send({
       error: error,
     });
-  }
-  
+  } 
 });
 
 // catch 404 and forward to error handler
