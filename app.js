@@ -58,17 +58,9 @@ app.post("/decryptCookie", async function (req, res, next) {
     
     // Execution of the program
 	const api = async function(){ 
-	const pkcs88 = '-----BEGIN PRIVATE KEY-----\n\
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP\n\
-SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
-/8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6\n\
------END PRIVATE KEY-----'; 
 	
-	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256'); 
-	const {nestedJwt} = await decryptFunction(encrypted, josePrivateKey);
-	console.log('Manu 02-->'+JSON.stringify(nestedJwt)); // log the data for demonstration purpose only
   
-    res.status(200).send(nestedJwt); //return Decrypted
+    	res.status(200).send('Manu'); //return Decrypted
     
 	}
 	api(); 
