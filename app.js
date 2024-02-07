@@ -12,7 +12,6 @@ const jwt = require("jsonwebtoken");
 const {v4: uuidv4} = require("uuid");
 
 const app = express();
-const port = 3001; 
  
 app.use(express.json());
 app.use(cors());
@@ -103,6 +102,3 @@ app.use(function (err, req, res, next) {
   });
 });
 
-app.listen(port, () =>
-  console.log(`Demo App Client listening on port ${port}!`)
-);
