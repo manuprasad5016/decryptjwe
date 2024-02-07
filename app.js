@@ -12,6 +12,7 @@ const jwt = require("jsonwebtoken");
 const {v4: uuidv4} = require("uuid");
 
 const app = express();
+const port = 3001; 
  
 app.use(express.json());
 app.use(cors());
@@ -33,6 +34,11 @@ app.post("/decryptCookie", async function (req, res, next) {
   try { 
 	const encrypted = req.body.jweEncrypted;
 	console.log('Cookie Received from Req-->'+encrypted);
+	
+	  console.log('Request Headers-->'+JSON.stringify(req.headers)); 
+	  const cookieHeader = req.headers?.cookie;
+	  console.log('Cookie-->'+cookieHeader);
+	  console.log('Cookie full-->'+req.headers.cookie);
   
 /*
     ***** FUNCTION TO RETURN STRINGIFY OUTPUT *****
@@ -102,3 +108,6 @@ app.use(function (err, req, res, next) {
   });
 });
 
+app.listen(port, () =>
+  console.log(`Decrypt Demo App Client listening on port ${port}!`)
+);
