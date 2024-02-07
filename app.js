@@ -55,11 +55,11 @@ function stringify(json) {
 	  var actualPayload;
 const decryptFunction = async function(jwe,privateKey){ 
   	const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey) 
-	console.log('plaintext-->'+plaintext);
+	//console.log('plaintext-->'+plaintext);
   	const decryptedJwt = await new TextDecoder().decode(plaintext);
-	console.log('decryptedJwt Hmm-->'+decryptedJwt);
+	console.log('decryptedJwt-->'+decryptedJwt);
   	const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
-	console.log('jwtDecoded-->'+jwtDecoded);
+	//console.log('jwtDecoded-->'+jwtDecoded);
   	const nestedJwt = stringify(jwtDecoded);
 	console.log('nestedJwt-->'+nestedJwt); 
 	actualPayload =''; 
