@@ -1,18 +1,10 @@
-//Manu Decrpt Code Sample
-
-// DEPENDENCIES
-//const jose = require("jose");
-//const {v4: uuidv4} = require('uuid');
-//const jwt = require('jsonwebtoken');
-
 const express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 const cors = require("cors");
 const colors = require("colors");
-const crypto = require("crypto");
-//var MyInfoConnector = require("myinfo-connector-v4-nodejs");
+const crypto = require("crypto"); 
 const fs = require("fs");
 
 const jose = require("jose");
@@ -20,12 +12,8 @@ const jwt = require("jsonwebtoken");
 const {v4: uuidv4} = require("uuid");
 
 const app = express();
-const port = 3001;
-//const config = require("./config/config.js");
-//const connector = new MyInfoConnector(config.MYINFO_CONNECTOR_CONFIG);
-
-//var sessionIdCache = {};
-
+const port = 3001; 
+ 
 app.use(express.json());
 app.use(cors());
 
@@ -40,16 +28,12 @@ app.use(
     extended: false,
   })
 );
-app.use(cookieParser());
+app.use(cookieParser()); 
 
-
-
-
-// Manu Below getPersonData function - call MyInfo Token + Person API
-app.post("/getPersonData", async function (req, res, next) {
+app.post("/decryptCookie", async function (req, res, next) {
   try { 
-	  const encrypted = req.body.jweEncrypted;
-console.log('Manu 01-->'+encrypted);
+	const encrypted = req.body.jweEncrypted;
+	console.log('Manu 01-->'+encrypted);
   
 /*
     ***** FUNCTION TO RETURN STRINGIFY OUTPUT *****
@@ -65,24 +49,18 @@ function stringify(json) {
 */
 	  var actualPayload;
 const decryptFunction = async function(jwe,privateKey){
-console.log('Onnmm');
-  const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey)
+	console.log('Onnmm');
+  	const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey)
 	console.log('Twww');
 	console.log('plaintext-->'+plaintext);
-  const decryptedJwt = await new TextDecoder().decode(plaintext);
-console.log('decryptedJwt Hmm-->'+decryptedJwt);
-  const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
+  	const decryptedJwt = await new TextDecoder().decode(plaintext);
+	console.log('decryptedJwt Hmm-->'+decryptedJwt);
+  	const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
 	console.log('jwtDecoded-->'+jwtDecoded);
-  const nestedJwt = stringify(jwtDecoded);
-	console.log('nestedJwt-->'+nestedJwt);
-  //actualPayload = base64Decode(jwtDecoded.payload.payload);
-	//console.log('actualPayload-->'+actualPayload);
-	actualPayload ='';
-
-  console.log(`Consumer Decrypted Nested JWT-\n${stringify(jwtDecoded)}\n`);
-  console.log(`Consumer Decrypted Actual Payload-\n${actualPayload}\n`);
-
-  return {decryptedJwt, nestedJwt, actualPayload}
+  	const nestedJwt = stringify(jwtDecoded);
+	console.log('nestedJwt-->'+nestedJwt); 
+	actualPayload =''; 
+  	return {decryptedJwt, nestedJwt, actualPayload}
 }
     
     // Execution of the program
