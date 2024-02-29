@@ -30,6 +30,32 @@ app.use(
 );
 app.use(cookieParser()); 
 
+//Manu New Cookie API , returns back Cookie
+app.get("/getCookie", function (req, res) {  
+  console.log('MM Headers-->'+JSON.stringify(req.headers)); 
+  const cookieHeader = req.headers?.cookie;
+  console.log('Cookie-->'+cookieHeader);
+  console.log('Cookie full-->'+req.headers.cookie);
+  
+  var randomNumber=Math.random().toString();
+   randomNumber=randomNumber.substring(2,randomNumber.length);
+   res.cookie('Manu',randomNumber, { maxAge: 900000, httpOnly: true });
+  //req.setHeader('Cookie', ['type=ninja', 'language=javascript']);
+  try {
+    var cookie = 'eyJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwiYWxnIjoiRUNESC1FUytBMjU2S1ciLCJraWQiOiJXRFMtRU5DUllQVC1PUFJQLURFVi1SUEJST0tFUiIsImVwayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6Ijd1dmpkNXh1bkU5ckFfVXBPcGRPdHhVdDFSUGs5TlFiLUpYdHNTWjhMNnciLCJ5IjoiSmlLS3R6S3J5bEZ2TXM4ejZRLWRsR0ptMkNZazBJNFhOUkpfOGl1aHNuZyJ9fQ.Xo8cCGurHEef8I2GlOMWJFIwRFHNImF02rCzIzctQtuJ6_u5itmpmO2KBZkB3ytA-C6j22_ZW55fykzYKHkZy7Jyv0Z8XCNa.zVcx0-y228ohjyBwFJxDdg.UFgk34BQCxsKwXAAK0_CAKgOnXyaYWXYp3lFR9VOuLiJcxK6y70nrKdUEYeNN1E-VWQfyIjFezmvGHDhXoHbB23IF-2KdMVylG9uV8ytX03_KaoEMTl9IwJnaZJuNNRl0uWGBcdVKISvfxW60x9quDjDqBPxzRN21lju48U55Fn_eRdUpA-9nW1_Smyxghj_1g6BkaDwXeDN27sKf_ni0EvGY_fzMBOTu-3pHImk4WrJflqb_WDFsqdav6Zbj3WxQMWtTeuMlcnCY1XQSvlSMvu6U3Y4Fn1BLlERjbKKf6eXHUu3yV3ycKqncKVrtggOMa0oZlasod4uIyj8pjExtjtqNSwF64JkNtG0vE0uh5Vic5pnkVZ0Q7SazkWSEHNVhjd3fvyiKR9WJKqehN_aOyjHeI6hc-2wUhJF4irJIUfeV6bQhu0j5NtFYB8jFJmqTnJtQbG9-Je_o1KUkMf1asEJ0MEfImurdg2ug9ITpIVQaFPiunmJ-PCA5VQoWsHcu2BbvAJut3OBiVOc6vFb74IW4N-U_MoqI-ePuuFkzFBsB3jz2UtCoEJ3bdEX_fMNy2KVFHil2td8TiEVGAl3xMj5hcf0QJyVQhB8AEpjsltDuVMBVc89D-tgoI8e-6qhIsfBoVmgjMbuo2Z2P6_BsuGy9T0WVrir71LTjsdu71mCxAsY-vzzxStn-1GMisOsbWiPLnKdK1CQYX-EmKk2HaHSgCGBBQ1P7NYcUFqOG4b7zh_JHba71GNa4PDeg8xExmFCvfhUKFOkqEWSUR2ogqJdqRmzcIdc4QGHToFWNAbLSIx2HoAJU-rgGwAHkYYDWfd7YOVOXaxmLcGezDwFk7TjC_dvb0nDqCvrDJKt-qASYix8LB7xKcipKVNOPbZuMSQThkvdLEFieuahy7k4KY7wEiOMmfu1aDD_EnAa7toSi_3Th9MWk4wPehGV0Nw1CybqcWNTM9SnxBICl2DLPtO4UnpxgIw5m2P_EigbXuvv-VOtX7iWicqGuYKNP0MXehnqeKV6nkqZMCSqcWwOAAhZbE3bH8N2ZH0oWJptL9frAJDnHEFmTJjGzC7N_NtvLhuaZE4nEDrOUOXZc5DXgK-oB3K63QB8wfE52D7neVdJUPCyhSftBkSNIANdlidMvVLWARaP8_W3_CWW_zdmBmN24An3Syw1iTbr0nFGHZXPnMHJbCzcSgh1whf5BgP8--wMYXKzpsFzCvHQlrJECDvBOzSW75yDo3ZTh2_Y_4I-AHnsUCQt63TYVQMK3E3mw4QsIFsjfLfuVNkzsFNlao8jaakYRaw15KATvGpWthvqbhxiWLgAj9ioadpfObFo3Ob9AXjcXnzXB37JDKTuhLeYVjOs7wqBW-tHCS5csGYq3PhpnL9X8TIgoC2o7rZ8WcHf1nXZjN9TjrVjGaKN72SLbTL9pOiJydvlxsnAjRz2yP602gTSAqi4O_PhwMrU.v-rR9Q96bfq7tlybtPCQ5jI0rNcvFzdAove5PX-wrO4';
+
+    res.status(200).send(cookie);
+ 
+  } catch (error) {
+    console.log("Error".red, error);
+    res.status(500).send({
+      error: error,
+    });
+  }
+});
+//Manu New Cookie API End
+
+//Manu Decrypt Cookie API , returns back Payload
 app.post("/decryptCookie", async function (req, res, next) {
   try { 
 	  console.log('Requested received in Node');
@@ -91,6 +117,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
     });
   } 
 });
+//Manu Decrypt Cookie API End
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
