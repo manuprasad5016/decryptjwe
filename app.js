@@ -34,7 +34,7 @@ app.post("/decryptCookie", async function (req, res, next) {
   try { 
 	  console.log('Requested received in Node');
 	  const encrypted = req.body.jweEncrypted;
-	  console.log('Cookie Received from Reqt-->'+encrypted);
+	  console.log('Cookie Received from Req-->'+encrypted);
 	
 	  console.log('Request Headers-->'+JSON.stringify(req.headers)); 
 	  const cookieHeader = req.headers?.cookie;
