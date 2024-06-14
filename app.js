@@ -108,8 +108,10 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
 	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256');
  
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
-  console.log('Decrypted JWT is-->'+JSON.stringify(nestedJwt)); 
-	console.log('Decrypted payload-->'+JSON.stringify(nestedJwt.payload)); 
+  console.log('Decrypted JWT is-->'+JSON.stringify(decryptedJwt)); 
+console.log('jwePayload payload-->'+JSON.stringify(jwePayload)); 
+console.log('nestedJwt JWT is-->'+JSON.stringify(nestedJwt)); 
+	console.log('actualPayload JWT is-->'+JSON.stringify(actualPayload)); 
   
     res.status(200).send(nestedJwt.payload);
 	}
