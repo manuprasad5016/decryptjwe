@@ -109,8 +109,9 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
  
   const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
   console.log('Decrypted JWT is-->'+JSON.stringify(nestedJwt)); 
+	console.log('Decrypted payload-->'+JSON.stringify(nestedJwt.payload)); 
   
-    res.status(200).send(actualPayload);
+    res.status(200).send(nestedJwt);
 	}
 	api(); 
   } 
