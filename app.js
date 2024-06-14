@@ -67,34 +67,7 @@ app.post("/decryptCookie", async function (req, res, next) {
 	  const encrypted = req.body.jweEncrypted;
 	  console.log('Cookie Received from Req-->'+encrypted);
 
-var encrypted = '{'+
-'"jti":"xIRK4AT0gsnP-ptnqs_2z",'+
-'"sub":"s=S24164527,u=4a5f46de-ad85-42b7-a400-8ccd63db210e,c=11040",'+
-'"iat":1708670940,'+
-'"exp":1708671540,'+
-'"scope":"openid",'+
-'"iss":"https://test-eservices.apps.cpfb.gov.sg/eservices/broker/mp/",'+
-'"aud":"encryptedoprp",'+
-'"logintimestamp":1708670940,'+
-'"lastlogintimestamp":1708670940,'+
-'"claimType":"cp",'+
-"tokid":"ictk_Sa2<T|H9x",'+
-'"userStatusId":1,'+
-'"introspectionroute":"mp",'+
-'"uid":"b2b71557-c50f-44b4-2c80-08dc33642132",'+
-'"amr":['+
-'"pwd"'+
-'],'+
-'"fullname":"Margie Lemke V",'+
-'"nonce":"TyBDxL6nHZn3gg5U19QXxFSyA7ye9rnkvVVuKr9CWtk",'+
-'"entityid":"T20ZZ0100H",'+
-'"iscorppassthirdpartyallowed":true,'+
-'"thirdPartyEntityId":['+
-'"95363"'+
-'],'+
-'"CPESrvcID":"CPFeServiceCP",'+
-'"isCorppassOwnEntityAllowed":true'+
-'}';
+var encrypted = '{"Key" : "Manu"}';
 	 
     var publicKey = new Jwk(
 		crv: "P-256",
