@@ -111,7 +111,7 @@ SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
   console.log('Decrypted JWT is-->'+JSON.stringify(nestedJwt)); 
 	console.log('Decrypted payload-->'+JSON.stringify(nestedJwt.payload)); 
   
-    res.status(200).send(nestedJwt);
+    res.status(200).send(nestedJwt.payload);
 	}
 	api(); 
   } 
