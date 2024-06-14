@@ -70,9 +70,9 @@ app.post("/decryptCookie", async function (req, res, next) {
 var encrypted = '{"Key" : "Manu"}';
 	 
     var publicKey = new Jwk(
-		crv: "P-256",
-		x: "98PMbEMr5XxFqmycz3SgRAYdnfgapPh8aBZeQFhT930",
-		y: "qHTt0ugI5tE0yx0gThIXfV-si4fa6lU9jj8us1xz7wY"
+		"crv" : "P-256",
+		"x" : "98PMbEMr5XxFqmycz3SgRAYdnfgapPh8aBZeQFhT930",
+		"y" : "qHTt0ugI5tE0yx0gThIXfV-si4fa6lU9jj8us1xz7wY"
 	);
 
 string token = Jose.JWT.Encode(encrypted, publicKey, JweAlgorithm.ECDH_ES_A256KW, JweEncryption.A256CBC_HS512);
