@@ -66,56 +66,47 @@ app.post("/decryptCookie", async function (req, res, next) {
 	  console.log('Requested received in Node');
 	  const encrypted = req.body.jweEncrypted;
 	  console.log('Cookie Received from Req-->'+encrypted);
-	
-	  console.log('Request Headers-->'+JSON.stringify(req.headers)); 
-	  const cookieHeader = req.headers?.cookie;
-	  console.log('Cookie-->'+cookieHeader);
-	  console.log('Cookie full-->'+req.headers.cookie);
-  
-/*
-    ***** FUNCTION TO RETURN STRINGIFY OUTPUT *****
-*/
-function stringify(json) {
-  return JSON.stringify(json,null);
-} 
+
+var encrypted = '{'+
+'"jti":"xIRK4AT0gsnP-ptnqs_2z",'+
+'"sub":"s=S24164527,u=4a5f46de-ad85-42b7-a400-8ccd63db210e,c=11040",'+
+'"iat":1708670940,'+
+'"exp":1708671540,'+
+'"scope":"openid",'+
+'"iss":"https://test-eservices.apps.cpfb.gov.sg/eservices/broker/mp/",'+
+'"aud":"encryptedoprp",'+
+'"logintimestamp":1708670940,'+
+'"lastlogintimestamp":1708670940,'+
+'"claimType":"cp",'+
+"tokid":"ictk_Sa2<T|H9x",'+
+'"userStatusId":1,'+
+'"introspectionroute":"mp",'+
+'"uid":"b2b71557-c50f-44b4-2c80-08dc33642132",'+
+'"amr":['+
+'"pwd"'+
+'],'+
+'"fullname":"Margie Lemke V",'+
+'"nonce":"TyBDxL6nHZn3gg5U19QXxFSyA7ye9rnkvVVuKr9CWtk",'+
+'"entityid":"T20ZZ0100H",'+
+'"iscorppassthirdpartyallowed":true,'+
+'"thirdPartyEntityId":['+
+'"95363"'+
+'],'+
+'"CPESrvcID":"CPFeServiceCP",'+
+'"isCorppassOwnEntityAllowed":true'+
+'}';
+	 
+    var publicKey = new Jwk(
+		crv: "P-256",
+		x: "98PMbEMr5XxFqmycz3SgRAYdnfgapPh8aBZeQFhT930",
+		y: "qHTt0ugI5tE0yx0gThIXfV-si4fa6lU9jj8us1xz7wY"
+	);
+
+string token = Jose.JWT.Encode(encrypted, publicKey, JweAlgorithm.ECDH_ES_A256KW, JweEncryption.A256CBC_HS512);
  
 
-/*
-    ***** DECRYPT JWE *****
-    The JWE is decrypted here.
-*/
-	  var actualPayload;
-const decryptFunction = async function(jwe,privateKey){ 
-  	const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey) 
-	//console.log('plaintext-->'+plaintext);
-  	const decryptedJwt = await new TextDecoder().decode(plaintext);
-	console.log('decryptedJwt-->'+decryptedJwt);
-  	const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
-	//console.log('jwtDecoded-->'+jwtDecoded);
-  	const nestedJwt = stringify(jwtDecoded);
-	console.log('nestedJwt-->'+nestedJwt); 
-	actualPayload =''; 
-  	return {decryptedJwt, nestedJwt, actualPayload}
-}
-    
-    // Execution of the program
-const api = async function(){  
-	const pkcs88 = '-----BEGIN PRIVATE KEY-----\n\
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP\n\
-SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
-/8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6\n\
------END PRIVATE KEY-----'; 
-	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256');
- 
-  const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
-  console.log('Decrypted JWT is-->'+JSON.stringify(decryptedJwt)); 
-console.log('jwePayload payload-->'+JSON.stringify(jwePayload)); 
-console.log('nestedJwt JWT is-->'+JSON.stringify(nestedJwt)); 
-	console.log('actualPayload JWT is-->'+JSON.stringify(actualPayload)); 
-  
-    res.status(200).send(nestedJwt.payload);
-	}
-	api(); 
+	res.status(200).send(token);
+   
   } 
   catch (error) {
     console.log("---MyInfo NodeJs Library Error---");
