@@ -66,53 +66,18 @@ app.post("/decryptCookie", async function (req, res, next) {
 	  console.log('Requested received in Node');
 	  const encrypted = req.body.jweEncrypted;
 	  console.log('Cookie Received from Req-->'+encrypted);
-	
-	  console.log('Request Headers-->'+JSON.stringify(req.headers)); 
-	  const cookieHeader = req.headers?.cookie;
-	  console.log('Cookie-->'+cookieHeader);
-	  console.log('Cookie full-->'+req.headers.cookie);
-  
-/*
-    ***** FUNCTION TO RETURN STRINGIFY OUTPUT *****
-*/
-function stringify(json) {
-  return JSON.stringify(json,null);
-} 
+	   
+
+	var publicKey = new Jwk(
+		crv: "P-256",
+		x: "98PMbEMr5XxFqmycz3SgRAYdnfgapPh8aBZeQFhT930",
+		y: "qHTt0ugI5tE0yx0gThIXfV-si4fa6lU9jj8us1xz7wY"
+	);
+
+string token = Jose.JWT.Encode(encrypted, publicKey, JweAlgorithm.ECDH_ES_A256KW, JweEncryption.A256CBC_HS512);
  
 
-/*
-    ***** DECRYPT JWE *****
-    The JWE is decrypted here.
-*/
-	  var actualPayload;
-const decryptFunction = async function(jwe,privateKey){ 
-  	const { plaintext, protectedHeader } = await jose.compactDecrypt(jwe, privateKey) 
-	//console.log('plaintext-->'+plaintext);
-  	const decryptedJwt = await new TextDecoder().decode(plaintext);
-	console.log('decryptedJwt-->'+decryptedJwt);
-  	const jwtDecoded = await jwt.decode(decryptedJwt,{complete:true});
-	//console.log('jwtDecoded-->'+jwtDecoded);
-  	const nestedJwt = stringify(jwtDecoded);
-	console.log('nestedJwt-->'+nestedJwt); 
-	actualPayload =''; 
-  	return {decryptedJwt, nestedJwt, actualPayload}
-}
-    
-    // Execution of the program
-const api = async function(){  
-	const pkcs88 = '-----BEGIN PRIVATE KEY-----\n\
-MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgg3x1HUUL3QkLStXP\n\
-SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
-/8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6\n\
------END PRIVATE KEY-----'; 
-	const josePrivateKey = await jose.importPKCS8(pkcs88,'ES256');
- 
-  const {decryptedJwt, jwePayload, nestedJwt, actualPayload} = await decryptFunction(encrypted, josePrivateKey);
-  console.log('Decrypted JWT is-->'+JSON.stringify(nestedJwt)); 
-  
-    res.status(200).send(nestedJwt);
-	}
-	api(); 
+	res.status(200).send(token);
   } 
   catch (error) {
     console.log("---MyInfo NodeJs Library Error---");
@@ -144,3 +109,4 @@ app.use(function (err, req, res, next) {
 app.listen(port, () =>
   console.log(`Decrypt Demo App Client listening on port ${port}!`)
 );
+ 
