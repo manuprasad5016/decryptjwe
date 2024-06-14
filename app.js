@@ -67,15 +67,19 @@ app.post("/decryptCookie", async function (req, res, next) {
 	  const encrypted = req.body.jweEncrypted;
 	  console.log('Cookie Received from Req-->'+encrypted);
 
-var encrypted = '{"Key" : "Manu"}';
+var payload = new Dictionary<string, object>()
+{
+    { "sub", "mr.x@contoso.com" },
+    { "exp", 1300819380 }
+};
 	 
     var publicKey = new Jwk(
-		"crv" : "P-256",
-		"x" : "98PMbEMr5XxFqmycz3SgRAYdnfgapPh8aBZeQFhT930",
-		"y" : "qHTt0ugI5tE0yx0gThIXfV-si4fa6lU9jj8us1xz7wY"
+		crv : "P-256",
+		x : "98PMbEMr5XxFqmycz3SgRAYdnfgapPh8aBZeQFhT930",
+		y : "qHTt0ugI5tE0yx0gThIXfV-si4fa6lU9jj8us1xz7wY"
 	);
 
-string token = Jose.JWT.Encode(encrypted, publicKey, JweAlgorithm.ECDH_ES_A256KW, JweEncryption.A256CBC_HS512);
+string token = Jose.JWT.Encode(payload, publicKey, JweAlgorithm.ECDH_ES_A256KW, JweEncryption.A256CBC_HS512);
  
 
 	res.status(200).send(token);
