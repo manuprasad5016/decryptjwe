@@ -59,12 +59,7 @@ app.post("/decryptCookie", async function (req, res, next) {
                     SVmnD8Dl6xHbsh7y5XuPU92H2kGhRANCAATyTtkjqH8ds9DB3oeVZnHHZDkiTOb7\n\
                     /8DZ4OHx+eFmJq8RvuxAQk5nSsQuew9nYTWMobEJgfqeWkE2xxcNWYc6\n\
                     -----END PRIVATE KEY-----';
-    const josePrivateKey = await jose.importPKCS8(pkcs88, 'ES256');
-
-    const { decryptedJwt, jwePayload, nestedJwt, actualPayload } = await decryptFunction(encrypted, josePrivateKey);
-    console.log('Decrypted JWT is-->' + JSON.stringify(nestedJwt));
-
-    res.status(200).send(nestedJwt);
+    const josePrivateKey = await jose.importPKCS8(pkcs88, 'ES256'); 
 
     /* ***** FUNCTION TO RETURN STRINGIFY OUTPUT ***** */
     function stringify(json) {
@@ -84,6 +79,11 @@ app.post("/decryptCookie", async function (req, res, next) {
       var actualPayload = '';
       return { decryptedJwt, nestedJwt, actualPayload }
     } 
+
+    const { decryptedJwt, jwePayload, nestedJwt, actualPayload } = await decryptFunction(encrypted, josePrivateKey);
+    console.log('Decrypted JWT is-->' + JSON.stringify(nestedJwt)); 
+    res.status(200).send(nestedJwt);
+    
   }
   catch (error) {
     console.log('decryptCookie Catch-->' + error);
